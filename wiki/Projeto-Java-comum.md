@@ -76,6 +76,12 @@ Digitem `0` e reparem no visor `0_`, ainda sem foto. Depois digitem `7`. Devem a
 
 ![O visor Swing depois de completar 07](https://github.com/NirtonAfonso/Tutorial-Firebase/blob/main/imagens/swing-numero-completo.png?raw=true)
 
+## Abrir uma pasta de exemplo na IDE
+
+No IntelliJ, usem **File → Open** e selecionem uma pasta como `exemplos/java-comum/02-swing-e-fotos`. Selecionem o JDK 21. Se o triângulo de execução não aparecer, cliquem com o botão direito em `src` e usem **Mark Directory as → Sources Root**. Façam o mesmo em `recursos`, escolhendo **Resources Root**. Abram `br.edu.urna.swing.UrnaSwing` e executem o `main`. Para os exemplos de console que abrem um arquivo, o diretório de trabalho é a pasta do exemplo, no mesmo nível de `src`.
+
+No NetBeans, os exemplos de Java comum vêm com os fontes. Para trabalhar com eles em um projeto Ant, criem um **Java Application** vazio para o assunto, desmarquem a criação da classe principal se o assistente oferecer essa opção e copiem o conteúdo de `src` do exemplo para **Source Packages**. Se o exemplo contiver `recursos/fotos`, copiem `fotos` para a raiz de `src` no projeto NetBeans. No de exceções, coloquem `candidato.txt` na pasta do projeto, ao lado de `src`. Usem **Run File** na classe indicada na aula. Se o programa roda pelo terminal e falha pela IDE, comparem o JDK, o diretório de trabalho e os caminhos de recursos.
+
 ## 4. Levem os exemplos para o projeto do grupo
 
 Se forem rodar os exemplos na IDE ou aproveitar código na urna do grupo, usem esta ordem. Se já tiverem uma classe com a mesma responsabilidade, comparem com a do exemplo e adaptem os métodos aos poucos.

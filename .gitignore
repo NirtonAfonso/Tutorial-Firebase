@@ -40,3 +40,6 @@ secrets/
 *serviceAccount*.json
 *firebase-adminsdk*.json
 conta-de-servico.json
+
+# Arquivo criado na prática local de persistência
+cadastro-de-treino.txt

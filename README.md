@@ -25,6 +25,6 @@ Em **Code → Download ZIP**, baixem o material e extraiam o arquivo. Dentro de 
 java exemplos/java-comum/01-primeiro-botao/src/TeclaSwing.java
 ```
 
-[Consultar os exemplos de todas as aulas na Wiki](https://github.com/NirtonAfonso/Tutorial-Firebase/wiki#código-de-cada-prática) · [Material das aulas desta revisão](wiki/Home.md)
+[Consultar os exemplos de todas as aulas na Wiki](https://github.com/NirtonAfonso/Tutorial-Firebase/wiki#código-de-cada-prática)
 
 **Nirton Afonso** · Programação Orientada a Objetos
