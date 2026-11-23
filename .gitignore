@@ -22,3 +22,21 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Maven e IDEs
+target/
+out/
+.idea/
+*.iml
+nbproject/private/
+nbactions.xml
+
+# Configuracao local e credenciais
+.env
+.env.*
+!.env.example
+secrets/
+*service-account*.json
+*serviceAccount*.json
+*firebase-adminsdk*.json
+conta-de-servico.json
