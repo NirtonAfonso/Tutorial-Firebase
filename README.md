@@ -1,38 +1,55 @@
 # Urna eletrônica em Java · roteiro de POO
 
-Pessoal, como não teremos mais encontros para trabalhar esses assuntos, organizei este roteiro para vocês conseguirem seguir por conta própria. Abram o projeto, rodem um exemplo por vez e façam as pequenas mudanças propostas. Se der erro, confiram primeiro o resultado esperado da etapa em que vocês estão. Assim fica mais fácil saber se o problema está no Java, na tela ou na conexão com o Firebase.
+Pessoal, organizei o material para vocês conseguirem estudar por conta própria e continuar de onde pararam no projeto. Comecem com a urna em memória, façam a foto aparecer no visor e só depois liguem a tela ao banco. Testar uma coisa de cada vez ajuda a localizar os erros.
 
-Este material serve tanto para o **projeto de extensão da manhã (Urna Cidadã)** quanto para a **AV3 da noite**. A parte técnica é a mesma. Nos dois enunciados, a interface da entrega é em **Java Swing**. Quem quiser conhecer JavaFX tem uma aula extra com a mesma lógica de votação. A tabela com as orientações de cada turma está na [página do trabalho](aulas/07-trabalho.md).
+O roteiro vale tanto para a **extensão da manhã (Urna Cidadã)** quanto para a **AV3 da noite**. A interface pedida nos dois trabalhos é **Swing**. JavaFX tem uma prática complementar. As datas e instruções de cada turma estão na [página da entrega](aulas/07-trabalho.md).
 
-## Comecem por aqui
+**[Abrir a Wiki do tutorial](https://github.com/NirtonAfonso/Tutorial-Firebase/wiki)**
 
-| Aula | O que vocês vão conseguir fazer |
-| --- | --- |
-| [1. Maven e migração do projeto](aulas/01-maven.md) | Abrir o exemplo no IntelliJ, criar um Maven do zero ou trazer o código já feito. |
-| [2. Uma urna básica com Swing](aulas/02-swing.md) | Montar visor e teclado, usar o GUI Builder do NetBeans se quiserem e mostrar a foto após o último dígito. |
-| [3. Exceções e tratamento de erros](aulas/03-excecoes.md) | Separar erro de digitação, foto ausente e falha de conexão. |
-| [4. Criando o Cloud Firestore](aulas/04-firestore.md) | Criar um projeto de laboratório, cadastrar candidatos fictícios e configurar o `.env`. |
-| [5. Java, Firebase e a classe Proxy](aulas/05-java-firebase.md) | Ler documentos, salvar um voto de teste e ligar a tela Swing ao banco. |
-| [6. Experimentando JavaFX](aulas/06-javafx.md) | Montar a tela com `Stage`, `Scene` e `GridPane` e reaproveitar a regra de digitação. |
-| [7. Adaptando para o trabalho](aulas/07-trabalho.md) | Organizar os dois cargos, a abertura, a zerésima, a apuração e a entrega da sua turma. |
+## Escolham o caminho que combina com o projeto de vocês
 
-## Para rodar a primeira vez
+| | Projeto Java comum | Projeto Maven |
+| --- | --- | --- |
+| Para começar | [Preparar o projeto no IntelliJ ou NetBeans](aulas/00-java-comum.md) | [Abrir, criar ou migrar o projeto](aulas/01-maven.md) |
+| Tela Swing | A mesma urna com JDK 21. | A mesma urna com JDK 21 e `pom.xml`. |
+| Firestore | [API REST com um JAR do Gson](aulas/05-firestore-sem-maven.md). A conta de teste entra pelo Firebase Authentication e as regras do Firestore controlam o acesso. | [Admin SDK declarado no POM](aulas/05-java-firebase.md). O exemplo usa uma conta de serviço no projeto de laboratório. |
+| Configuração de conexão | [Modelo de `.env` para Java comum](java-comum/.env.example) | [Modelo de `.env` para Maven](.env.example) |
+| JavaFX | SDK baixado à parte. | Dependência baixada pelo Maven. |
 
-Com **JDK 21** e o Maven, abram a pasta que tem o [pom.xml](pom.xml). Se estiverem no IntelliJ, podem usar o Maven que já vem na IDE. Na [primeira aula](aulas/01-maven.md) mostro como rodar pelo menu e pelo terminal.
+Quem já montou a urna em um projeto comum pode continuar nele. Quem quiser migrar encontra o passo a passo na aula de Maven.
 
-```bash
-git clone https://github.com/NirtonAfonso/Tutorial-Firebase.git
-cd Tutorial-Firebase
-mvn clean compile
-mvn exec:java
+## Aulas para os dois caminhos
+
+1. [Swing, teclado numérico e foto](aulas/02-swing.md). Testem o visor, os botões e a passagem do primeiro para o último dígito.
+2. [Exceções e tratamento de erros](aulas/03-excecoes.md). Vejam como a tela reage a entradas inválidas, arquivos ausentes e falhas de rede.
+3. [Criar o banco e cadastrar candidatos](aulas/04-firestore.md). A partir daí, sigam para o exemplo de Firestore da trilha escolhida.
+4. [JavaFX, com Maven e sem Maven](aulas/06-javafx.md). Experimentem a prática complementar com a mesma lógica de votação.
+5. [Adaptar para o trabalho e conferir a entrega](aulas/07-trabalho.md). Organizem os dois cargos, a zerésima, a abertura, o encerramento e os relatórios.
+
+## Primeira execução
+
+Baixem o repositório pelo **Code → Download ZIP**, descompactem e entrem na pasta que contém este README. Vocês também podem clonar com Git. Para abrir o material, usem a conta GitHub que recebeu acesso.
+
+**Java comum**, primeira janela usando apenas o JDK 21:
+
+```text
+java exemplos/primeiro-botao/TeclaSwing.java
 ```
 
-Também dá para baixar em **Code → Download ZIP**, descompactar e abrir o `pom.xml`. Enquanto o repositório estiver privado, usem a conta GitHub que recebeu acesso.
+A tecla `7` muda o visor de `_` para `7`. Depois, [rodem a urna de treino sem Maven](aulas/00-java-comum.md#3-executem-a-urna-de-treino-sem-banco).
 
-Na janela Swing, digitem `0`, esperem um instante e depois apertem `7`. O visor mostra **Júlia Horizonte** e a foto só no segundo clique. Experimentem `CORRIGE`, `BRANCO` e o número `99`. Essa primeira tela grava em memória. O exemplo conectado ao Firestore está na aula 5.
+**Maven**, urna de treino em memória:
 
-![Exemplo Swing após digitar 07](imagens/swing-numero-completo.png)
+```bash
+mvn clean compile exec:java
+```
 
-Cada exemplo trabalha um pedaço do projeto. Os grupos vão implementar a passagem entre os dois cargos, a administração e os relatórios usando as orientações da última aula.
+No IntelliJ também dá para abrir o [POM](pom.xml) e executar o `main` de [UrnaSwing](src/main/java/br/edu/urna/swing/UrnaSwing.java). O IntelliJ inclui um Maven que pode ser usado pela própria IDE.
+
+Na urna de treino, apertem `0` e depois `7`. O visor mostra **Júlia Horizonte**, o partido LAB e a foto no segundo clique. Façam também um teste com **CORRIGE**, **BRANCO** e o número `99`.
+
+![Exemplo Swing depois de completar 07](imagens/swing-numero-completo.png)
+
+Cada exemplo trabalha um pedaço do projeto. A última aula indica como juntar os dois cargos, administrar a eleição e montar a apuração.
 
 **Nirton Afonso** · Programação Orientada a Objetos

@@ -50,6 +50,8 @@ Rodem uma vez sem o arquivo. Depois criem `candidatos.txt` na pasta de execuçã
 
 ### Onde capturar os erros do Firestore
 
+O tratamento na tela é o mesmo para quem está em Java comum e para quem está usando Maven. Na [conexão REST](05-firestore-sem-maven.md), o proxy trata a resposta HTTP, o tempo de espera e a interrupção da requisição. Na [conexão pelo Admin SDK](05-java-firebase.md), o proxy trata o resultado da operação enviada pelo SDK. Os dois entregam à tela uma `PersistenciaException` quando a gravação falha.
+
 A [classe FirestoreProxy](../src/main/java/br/edu/urna/dados/FirestoreProxy.java) espera no máximo dez segundos pela resposta de cada chamada. Ela traduz a falha do SDK para [PersistenciaException](../src/main/java/br/edu/urna/dados/PersistenciaException.java), guardando a causa. Se a operação for interrompida, o código restaura o sinal com `Thread.currentThread().interrupt()` antes de propagar a falha.
 
 No [PainelSwing](../src/main/java/br/edu/urna/swing/PainelSwing.java), o `SwingWorker` faz a gravação em `doInBackground()` e devolve o controle para a tela em `done()`. Se o grupo chamar o banco diretamente dentro de `actionPerformed`, a janela pode ficar sem responder enquanto espera. Em `done()`, `get()` sinaliza se o trabalho terminou com sucesso ou lançou uma exceção. O visor só avança depois do sucesso.

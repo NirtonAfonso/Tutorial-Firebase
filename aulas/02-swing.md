@@ -1,6 +1,6 @@
 # 2. Construindo o teclado e o visor com Swing
 
-[Voltar ao roteiro](../README.md) · [Aula anterior](01-maven.md) · [Próxima aula: exceções](03-excecoes.md)
+[Voltar ao roteiro](../README.md) · [Preparo com Java comum](00-java-comum.md) · [Preparo com Maven](01-maven.md) · [Próxima aula: exceções](03-excecoes.md)
 
 Vamos começar com um cargo de treino e dois candidatos inventados. A ideia é vocês conseguirem ver o efeito de cada botão primeiro. Depois fica bem mais fácil colocar isso na tela que o grupo já começou.
 
@@ -16,7 +16,7 @@ A janela abre com um `_`. Cliquem em `7` e vejam o texto mudar. O botão tem um 
 
 ## Rodem a urna
 
-Na pasta com `pom.xml`, executem `mvn compile exec:java` ou rodem o `main` em [UrnaSwing.java](../src/main/java/br/edu/urna/swing/UrnaSwing.java). Nenhuma conta Firebase é necessária nesta aula.
+Com **Java comum**, sigam os [comandos do JDK](00-java-comum.md#3-executem-a-urna-de-treino-sem-banco) ou abram o `main` de [UrnaSwing.java](../src/main/java/br/edu/urna/swing/UrnaSwing.java) na IDE depois de copiar as classes indicadas no roteiro. Com **Maven**, na pasta com `pom.xml`, executem `mvn compile exec:java` ou rodem o mesmo `main` na IDE. Nas duas trilhas o teste é em memória.
 
 | Façam isto | Observem isto |
 | --- | --- |

@@ -4,6 +4,8 @@
 
 Rodar o exemplo é o começo. No trabalho de vocês, a mesma pessoa vota em **dois cargos**, a urna tem abertura e encerramento e o resultado fica separado por cargo. Vou usar `vereador → prefeito` nos exemplos abaixo. Na AV3, as opções do enunciado são **vereador e prefeito** ou **governador e presidente**, sem segundo turno. Na extensão, escolham **um cargo proporcional e um majoritário** e usem candidatos e partidos fictícios.
 
+Podem seguir pelo [projeto Java comum](00-java-comum.md) ou pelo [projeto Maven](01-maven.md). Na documentação da equipe, registrem o caminho que escolheram, a versão do JDK e a configuração de conexão que outra pessoa precisa para executar o simulador.
+
 ## O que conferir no simulador
 
 | Parte | O que o grupo deve demonstrar |
@@ -77,7 +79,7 @@ O `100.0` faz o cálculo em ponto flutuante. Com dez votos e uma linha com três
 | Simular falha no envio e tentar novamente | A tela informa a falha e a tentativa mantém o ID. A contagem não duplica. |
 | Encerrar após uma votação completa | A nova janela mostra os dois cargos e a urna fica bloqueada. |
 | Encerrar uma eleição sem votos | Todos aparecem com zero, sem divisão por zero. |
-| Abrir o projeto em outra máquina | POM, fotos, README e exemplo do `.env` estão disponíveis. Segredos ficam fora do Git. |
+| Abrir o projeto em outra máquina | Fotos, README e modelo do `.env` estão disponíveis. Se usarem Maven, confiram o POM. Se usarem Java comum, indiquem os JARs e como adicioná-los. Segredos ficam fora do Git. |
 
 ## Orientações de cada turma
 

@@ -1,8 +1,10 @@
-# 1. Colocando o projeto no Maven
+# 1B. Colocando o projeto no Maven
 
-[Voltar ao roteiro](../README.md) · [Próxima aula: Swing](02-swing.md)
+[Voltar ao roteiro](../README.md) · [Projeto Java comum](00-java-comum.md) · [Próxima aula: Swing](02-swing.md)
 
 Se o Java já rodava no seu computador e passou a dar erro quando você mandou o projeto para um colega, vocês provavelmente esbarraram no problema que o Maven ajuda a resolver. Lembram dos arquivos `.jar` adicionados manualmente na IDE? Com o Maven, o grupo declara as bibliotecas e suas versões no `pom.xml`. A IDE ou o Maven baixa as bibliotecas necessárias, inclusive as dependências que elas usam. Assim o grupo compila com as mesmas versões.
+
+A migração é uma opção para o grupo. Se vocês já têm as telas em um projeto comum e querem seguir nele, façam a [outra trilha](00-java-comum.md). Para a prática com Maven, o Firestore usa o Admin SDK e o JavaFX entra pelo POM.
 
 ## Confiram o Java antes de mexer no projeto
 

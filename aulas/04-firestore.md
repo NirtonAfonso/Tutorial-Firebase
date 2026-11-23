@@ -1,8 +1,10 @@
 # 4. Criando o banco no Firebase
 
-[Voltar ao roteiro](../README.md) · [Aula anterior](03-excecoes.md) · [Próxima aula: Java e Firebase](05-java-firebase.md)
+[Voltar ao roteiro](../README.md) · [Aula anterior](03-excecoes.md) · [Conectar com Java comum](05-firestore-sem-maven.md) · [Conectar com Maven](05-java-firebase.md)
 
 Firebase é a plataforma. Para este roteiro, dentro dela vamos usar o **Cloud Firestore**, o banco NoSQL que aparece no projeto de extensão. Na AV3 o enunciado também traz um link do Realtime Database. Os dois serviços têm formatos e APIs diferentes. Para os exemplos abaixo, sigam pelo **Firestore**.
+
+Até cadastrar os candidatos, os passos abaixo valem para os dois caminhos. Depois disso, para **Java comum**, configurem [Authentication, regras e `.env` REST](05-firestore-sem-maven.md). Para **Maven**, sigam a configuração de conta de serviço mais abaixo.
 
 Pensem em uma **coleção** como um conjunto de documentos. Cada documento tem um ID e vários campos. Vamos guardar `07` como ID do candidato para preservar o zero inicial. A foto fica nos recursos do projeto. No banco guardamos apenas o nome do PNG.
 
@@ -12,7 +14,7 @@ Pensem em uma **coleção** como um conjunto de documentos. Cada documento tem u
 2. Avancem pelas opções. Analytics e os demais produtos são dispensáveis para este exercício. Não é necessário cadastrar aplicativo Android, iOS ou Web.
 3. Na barra lateral, abram **Firestore Database**. Dependendo do idioma ou da versão do console, a opção aparece em **Criar/Build** ou **Databases & Storage**. Cliquem em **Criar banco de dados**.
 4. Selecionem **Standard**, o banco padrão `(default)` e uma localização disponível para o grupo. A localização é uma escolha permanente para esse banco. Confiram antes de criar.
-5. Escolham **modo de produção**. O cliente sem autorização fica bloqueado. O Java do laboratório vai acessar o banco com uma conta de serviço autorizada no IAM.
+5. Escolham **modo de produção**. O cliente sem autorização fica bloqueado. Na trilha Maven, o Java usa uma conta de serviço autorizada no IAM. Na trilha Java comum, vocês publicam as regras específicas para o usuário de teste na aula de conexão REST.
 
 ## Cadastrar os dois candidatos de treino
 
@@ -29,7 +31,11 @@ Os nomes dos campos são minúsculos e sem acento. Guardem apenas o nome do PNG 
 
 Imagem do [codelab oficial do Firebase](https://firebase.google.com/codelabs/firestore-web). Nesse print os dados são de um restaurante. Na urna, a coluna da esquerda deve mostrar `candidatos_demo` e a do meio deve mostrar `07` e `12`.
 
-## Criar uma credencial para o laboratório
+## Escolher a conexão depois de cadastrar os candidatos
+
+Se o grupo está em **Java comum**, o cadastro está pronto para a próxima etapa. [Criem a conta de teste e conectem por REST](05-firestore-sem-maven.md).
+
+### Maven · criar uma credencial para o laboratório
 
 Usem um projeto separado, dados fictícios e uma estação de desenvolvimento controlada pelo grupo. O Admin SDK autentica como uma conta de serviço e usa permissões do **IAM**. As **Security Rules** do Firestore valem para os clientes a que elas se aplicam, mas o Admin SDK não é filtrado por essas regras. Por isso a chave fica na máquina que executa o laboratório. Para distribuir a urna a usuários em outros computadores, mantenham a credencial em um backend controlado e façam a tela chamar esse backend.
 
@@ -38,7 +44,7 @@ Usem um projeto separado, dados fictícios e uma estação de desenvolvimento co
 3. Na conta criada, abram **Chaves → Adicionar chave → Criar nova chave → JSON**. Se uma política institucional bloquear a criação de chaves, usem um ambiente autorizado para a prática e mantenham o modo em memória enquanto isso.
 4. Guardem o JSON fora do repositório, com acesso apenas de quem administra aquele ambiente. Na tela **Contas de serviço** do Firebase também é possível encontrar as instruções oficiais do Admin SDK. Neste exercício a conta dedicada facilita limitar a permissão.
 
-## Configurar o arquivo `.env`
+### Maven · configurar o arquivo `.env`
 
 Na raiz do projeto Maven, onde fica o `pom.xml`, façam uma cópia do [`.env.example`](../.env.example) chamada `.env`.
 

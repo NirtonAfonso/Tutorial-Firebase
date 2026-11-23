@@ -1,8 +1,10 @@
-# 5. Ligando o Java ao Firestore com uma classe própria
+# 5B. Conectando o projeto Maven ao Firestore
 
-[Voltar ao roteiro](../README.md) · [Aula anterior](04-firestore.md) · [Próxima aula: JavaFX](06-javafx.md)
+[Voltar ao roteiro](../README.md) · [Criar o banco](04-firestore.md) · [Versão em Java comum](05-firestore-sem-maven.md) · [Próxima aula: JavaFX](06-javafx.md)
 
 Primeiro façam o console ler e gravar. Quando essa etapa funcionar, liguem a tela. Se vocês tentarem as duas coisas de uma vez e a foto não aparecer, vão ter mais lugares para investigar.
+
+Nesta trilha, o Maven baixa o Admin SDK que está declarado no POM. Antes de rodar o teste, façam no [roteiro de criação do banco](04-firestore.md) o cadastro dos dois candidatos, a configuração da conta de serviço e o `.env` da trilha Maven.
 
 ## Quem faz cada parte
 
