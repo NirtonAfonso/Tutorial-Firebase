@@ -1,37 +1,30 @@
-# Compiled class file
+# Arquivos compilados e pacotes Java
 *.class
-
-# Log file
 *.log
-
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
 *.jar
 *.war
-*.nar
 *.ear
 *.zip
 *.tar.gz
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
 
-# Maven e IDEs
+# Pastas de build e IDEs (IntelliJ, NetBeans, Eclipse, VS Code)
 target/
 out/
+build/
 .idea/
 *.iml
 nbproject/private/
 nbactions.xml
+.classpath
+.project
+.settings/
+.vscode/
 
-# Configuracao local e credenciais
+# Segredos, variaveis de ambiente e chaves privadas do Firebase
+# NUNCA remova estas regras!
 .env
 .env.*
 !.env.example
@@ -39,7 +32,5 @@ secrets/
 *service-account*.json
 *serviceAccount*.json
 *firebase-adminsdk*.json
-conta-de-servico.json
-
-# Arquivo criado na prática local de persistência
-cadastro-de-treino.txt
+*chave*.json
+credenciais/

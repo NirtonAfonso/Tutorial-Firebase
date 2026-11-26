@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial Urna Eletrônica em Java · POO</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/styles/github-dark.min.css" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-alt: #f1f5f9;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --primary: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --code-bg: #0f172a;
+      --inline-code-bg: #e2e8f0;
+      --shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --sidebar-w: 295px;
+    }
+    [data-theme="dark"] {
+      --bg: #0b1120;
+      --surface: #111827;
+      --surface-alt: #1e293b;
+      --border: #263248;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --primary: #60a5fa;
+      --primary-soft: rgba(59, 130, 246, 0.14);
+      --code-bg: #020617;
+      --inline-code-bg: #1e293b;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.68;
+    }
+    header.topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 58px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      z-index: 40;
+      box-shadow: var(--shadow);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .menu-btn {
+      display: none;
+      background: var(--surface-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .top-actions a, .top-actions button {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .top-actions a:hover, .top-actions button:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    aside.sidebar {
+      position: fixed;
+      top: 58px; bottom: 0; left: 0;
+      width: var(--sidebar-w);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+      padding: 16px 14px 28px;
+      z-index: 30;
+      transition: transform 0.2s ease;
+    }
+    .search-box {
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+    .nav-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin: 6px 8px 8px;
+    }
+    .nav-list { list-style: none; margin: 0; padding: 0; }
+    .nav-item a {
+      display: block;
+      padding: 9px 11px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      margin-bottom: 4px;
+      border: 1px solid transparent;
+    }
+    .nav-item a:hover { background: var(--surface-alt); }
+    .nav-item a.active {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-color: rgba(37, 99, 235, 0.25);
+      font-weight: 600;
+    }
+    .nav-sub {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+    main.content-wrap {
+      margin-left: var(--sidebar-w);
+      padding: 82px 28px 60px;
+      display: flex;
+      justify-content: center;
+    }
+    article.doc {
+      width: 100%;
+      max-width: 900px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px 42px;
+      box-shadow: var(--shadow);
+    }
+    article.doc h1 { font-size: 1.9rem; margin-top: 0; line-height: 1.25; border-bottom: 2px solid var(--border); padding-bottom: 12px; }
+    article.doc h2 { font-size: 1.4rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    article.doc h3 { font-size: 1.12rem; margin-top: 1.4rem; }
+    article.doc a { color: var(--primary); text-decoration: none; }
+    article.doc a:hover { text-decoration: underline; }
+    article.doc img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin: 14px 0;
+      display: block;
+      box-shadow: var(--shadow);
+    }
+    article.doc blockquote {
+      margin: 16px 0;
+      padding: 12px 16px;
+      border-left: 4px solid var(--primary);
+      background: var(--primary-soft);
+      border-radius: 0 8px 8px 0;
+    }
+    article.doc blockquote p { margin: 4px 0; }
+    article.doc table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 0.92rem;
+      display: block;
+      overflow-x: auto;
+    }
+    article.doc th, article.doc td {
+      border: 1px solid var(--border);
+      padding: 9px 12px;
+      text-align: left;
+    }
+    article.doc th { background: var(--surface-alt); font-weight: 700; }
+    article.doc code {
+      font-family: "Cascadia Code", Consolas, "Fira Code", monospace;
+      font-size: 0.88em;
+      background: var(--inline-code-bg);
+      padding: 2px 5px;
+      border-radius: 5px;
+    }
+    .code-wrap { position: relative; margin: 16px 0; }
+    article.doc pre {
+      background: var(--code-bg);
+      color: #e2e8f0;
+      padding: 16px 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin: 0;
+    }
+    article.doc pre code { background: transparent; padding: 0; color: inherit; font-size: 0.87rem; }
+    .copy-btn {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .copy-btn:hover { background: rgba(255, 255, 255, 0.22); }
+    .mermaid {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 16px 0;
+      text-align: center;
+      overflow-x: auto;
+    }
+    .pager {
+      margin-top: 34px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pager a {
+      padding: 10px 16px;
+      border-radius: 9px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .pager a:hover { border-color: var(--primary); color: var(--primary); }
+    .footer-note {
+      margin-top: 24px;
+      text-align: center;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+    @media (max-width: 900px) {
+      .menu-btn { display: inline-block; }
+      aside.sidebar { transform: translateX(-100%); }
+      aside.sidebar.open { transform: translateX(0); box-shadow: 0 8px 30px rgba(0,0,0,0.28); }
+      main.content-wrap { margin-left: 0; padding: 74px 14px 40px; }
+      article.doc { padding: 22px 18px; }
+      .hide-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+      <a class="brand" href="#/Home">🗳️ Tutorial Urna Eletrônica · POO</a>
+    </div>
+    <div class="top-actions">
+      <a href="https://github.com/NirtonAfonso/Tutorial-Firebase" target="_blank" rel="noopener">📁 GitHub</a>
+      <a class="hide-mobile" href="https://github.com/NirtonAfonso/Tutorial-Firebase/wiki" target="_blank" rel="noopener">📚 Wiki</a>
+      <button id="themeBtn" type="button">🌙 Tema</button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <input type="search" id="searchInput" class="search-box" placeholder="🔎 Buscar nas aulas (ex: foto, .env, maven)..." />
+    <div class="nav-label">Roteiro de Aulas</div>
+    <ul class="nav-list" id="navList"></ul>
+  </aside>
+
+  <main class="content-wrap">
+    <article class="doc">
+      <div id="content">Carregando aulas...</div>
+      <nav class="pager" id="pager"></nav>
+      <div class="footer-note">
+        Programação Orientada a Objetos (POO) · Prof. Nirton Afonso · UNIJORGE
+      </div>
+    </article>
+  </main>
+
+  <script src="aulas-data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@14.1.2/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/lib/common.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.min.js"></script>
+  <script>
+    (function () {
+      const aulas = window.AULAS_DATA || [];
+      const navList = document.getElementById("navList");
+      const contentEl = document.getElementById("content");
+      const pagerEl = document.getElementById("pager");
+      const searchInput = document.getElementById("searchInput");
+      const sidebar = document.getElementById("sidebar");
+      const menuBtn = document.getElementById("menuBtn");
+      const themeBtn = document.getElementById("themeBtn");
+
+      if (window.mermaid) {
+        mermaid.initialize({ startOnLoad: false, theme: "default" });
+      }
+
+      // Tema claro / escuro
+      const savedTheme = localStorage.getItem("urna_tutorial_theme");
+      if (savedTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+        themeBtn.textContent = "☀️ Tema";
+      }
+      themeBtn.addEventListener("click", function () {
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          document.documentElement.removeAttribute("data-theme");
+          localStorage.setItem("urna_tutorial_theme", "light");
+          themeBtn.textContent = "🌙 Tema";
+        } else {
+          document.documentElement.setAttribute("data-theme", "dark");
+          localStorage.setItem("urna_tutorial_theme", "dark");
+          themeBtn.textContent = "☀️ Tema";
+        }
+      });
+
+      menuBtn.addEventListener("click", function () {
+        sidebar.classList.toggle("open");
+      });
+
+      function renderSidebar(filterText, activeSlug) {
+        const q = (filterText || "").trim().toLowerCase();
+        navList.innerHTML = "";
+        aulas.forEach(function (aula) {
+          if (q && !(aula.title.toLowerCase().includes(q)
+              || aula.subtitle.toLowerCase().includes(q)
+              || aula.markdown.toLowerCase().includes(q))) {
+            return;
+          }
+          const li = document.createElement("li");
+          li.className = "nav-item";
+          const a = document.createElement("a");
+          a.href = "#/" + aula.slug;
+          if (aula.slug === activeSlug) a.className = "active";
+          a.innerHTML = aula.title + '<span class="nav-sub">' + aula.subtitle + "</span>";
+          a.addEventListener("click", function () { sidebar.classList.remove("open"); });
+          li.appendChild(a);
+          navList.appendChild(li);
+        });
+      }
+
+      function getCurrentSlug() {
+        const hash = window.location.hash || "#/Home";
+        const clean = hash.replace(/^#\/?/, "").split("#")[0];
+        return aulas.some(function (a) { return a.slug === clean; }) ? clean : "Home";
+      }
+
+      async function renderCurrentLesson() {
+        const slug = getCurrentSlug();
+        const idx = aulas.findIndex(function (a) { return a.slug === slug; });
+        const aula = aulas[idx] || aulas[0];
+        if (!aula) return;
+
+        renderSidebar(searchInput.value, aula.slug);
+        document.title = aula.title + " · Tutorial Urna Java";
+
+        // Renderiza Markdown
+        if (window.marked) {
+          marked.setOptions({ gfm: true, breaks: false });
+          contentEl.innerHTML = marked.parse(aula.markdown);
+        } else {
+          contentEl.innerHTML = "<pre>" + aula.markdown + "</pre>";
+        }
+
+        // Converte blocos ```mermaid em diagramas reais
+        const mermaidBlocks = contentEl.querySelectorAll("pre code.language-mermaid");
+        mermaidBlocks.forEach(function (codeEl) {
+          const pre = codeEl.parentElement;
+          const div = document.createElement("div");
+          div.className = "mermaid";
+          div.textContent = codeEl.textContent;
+          pre.replaceWith(div);
+        });
+        if (window.mermaid && mermaidBlocks.length > 0) {
+          try { await mermaid.run({ querySelector: ".mermaid" }); } catch (e) {}
+        }
+
+        // Destaque de sintaxe e botao de copiar nos blocos de codigo
+        contentEl.querySelectorAll("pre").forEach(function (pre) {
+          const code = pre.querySelector("code");
+          if (window.hljs && code) {
+            try { hljs.highlightElement(code); } catch (e) {}
+          }
+          const wrap = document.createElement("div");
+          wrap.className = "code-wrap";
+          pre.parentNode.insertBefore(wrap, pre);
+          wrap.appendChild(pre);
+
+          const btn = document.createElement("button");
+          btn.className = "copy-btn";
+          btn.type = "button";
+          btn.textContent = "Copiar";
+          btn.addEventListener("click", function () {
+            navigator.clipboard.writeText(pre.innerText).then(function () {
+              btn.textContent = "Copiado!";
+              setTimeout(function () { btn.textContent = "Copiar"; }, 1600);
+            });
+          });
+          wrap.appendChild(btn);
+        });
+
+        // Links externos abrem em nova aba
+        contentEl.querySelectorAll("a[href^='http']").forEach(function (link) {
+          link.setAttribute("target", "_blank");
+          link.setAttribute("rel", "noopener");
+        });
+
+        // Botoes Anterior / Proxima aula
+        pagerEl.innerHTML = "";
+        const prev = idx > 0 ? aulas[idx - 1] : null;
+        const next = idx < aulas.length - 1 ? aulas[idx + 1] : null;
+        const left = document.createElement("div");
+        const right = document.createElement("div");
+        if (prev) left.innerHTML = '<a href="#/' + prev.slug + '">⬅️ ' + prev.title + "</a>";
+        if (next) right.innerHTML = '<a href="#/' + next.slug + '">' + next.title + " ➡️</a>";
+        pagerEl.appendChild(left);
+        pagerEl.appendChild(right);
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      searchInput.addEventListener("input", function () {
+        renderSidebar(searchInput.value, getCurrentSlug());
+      });
+
+      window.addEventListener("hashchange", renderCurrentLesson);
+      renderCurrentLesson();
+    })();
+  </script>
+</body>
+</html>

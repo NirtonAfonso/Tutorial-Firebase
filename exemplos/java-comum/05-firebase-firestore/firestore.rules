@@ -1,0 +1,14 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Permite leitura e gravacao nas colecoes da urna apenas para
+    // usuarios autenticados no Firebase Authentication (E-mail/Senha).
+    match /candidatos/{documento} {
+      allow read: if request.auth != null;
+    }
+
+    match /votos/{documento} {
+      allow read, create: if request.auth != null;
+    }
+  }
+}
