@@ -1,44 +1,59 @@
 /*
- * Exemplo 04 - Leitura de arquivo .env e Padrao Proxy
+ * Exemplo 04 - Leitura de arquivo .env e Padrao Proxy (Camada Service)
  * Disciplina: Programacao Orientada a Objetos (POO)
  *
- * Implementacao em memoria do contrato UrnaRepository.
- * Permite testar toda a aplicacao localmente antes de ligar ao Firebase.
+ * Implementacao em memoria da camada de persistencia (UrnaRepository).
  */
 package br.edu.urna.proxy;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Proxy em memoria que simula um banco de dados enquanto a equipe desenvolve as telas.
- * Depois, basta trocar esta classe por FirestoreProxy sem alterar a interface grafica.
+ * Persistencia em memoria para testes locais sem precisar de internet.
+ * Cumpre o mesmo contrato (UrnaRepository) que a persistencia real do Cloud Firestore.
  */
 public class MemoriaUrnaProxy implements UrnaRepository {
 
-    private List<String> candidatos;
+    private Map<String, String> candidatosPorNumero;
+    private Map<String, String> partidosPorNumero;
     private List<String> votos;
 
-    /**
-     * Inicializa o proxy com candidatos ficticios de treino.
-     */
     public MemoriaUrnaProxy() {
-        this.candidatos = new ArrayList<String>();
-        this.candidatos.add("91001 - Golfe (PEsp)");
-        this.candidatos.add("91002 - Beisebol (PEsp)");
-        this.candidatos.add("92001 - Rock (PMus)");
+        this.candidatosPorNumero = new LinkedHashMap<String, String>();
+        this.candidatosPorNumero.put("91001", "91001 - Golfe (PEsp)");
+        this.candidatosPorNumero.put("91002", "91002 - Beisebol (PEsp)");
+        this.candidatosPorNumero.put("92001", "92001 - Rock (PMus)");
+        this.candidatosPorNumero.put("93001", "93001 - Astronauta (PProf)");
+
+        this.partidosPorNumero = new LinkedHashMap<String, String>();
+        this.partidosPorNumero.put("91", "PEsp - Partido dos Esportes");
+        this.partidosPorNumero.put("92", "PMus - Partido dos Ritmos Musicais");
+        this.partidosPorNumero.put("93", "PProf - Partido das Profissoes");
 
         this.votos = new ArrayList<String>();
     }
 
     @Override
     public List<String> listarCandidatos() {
-        return new ArrayList<String>(candidatos);
+        return new ArrayList<String>(candidatosPorNumero.values());
+    }
+
+    @Override
+    public String buscarCandidatoPorNumero(String numero) {
+        return candidatosPorNumero.get(numero);
+    }
+
+    @Override
+    public String buscarPartidoPorNumero(String numeroPartido) {
+        return partidosPorNumero.get(numeroPartido);
     }
 
     @Override
     public void salvarVoto(String numeroDigitado) {
-        System.out.println("[MemoriaUrnaProxy] Salvando voto em memoria: " + numeroDigitado);
+        System.out.println("[Persistencia] Salvando voto no repositorio: " + numeroDigitado);
         votos.add(numeroDigitado);
     }
 

@@ -1,38 +1,43 @@
 /*
- * Exemplo 04 - Leitura de arquivo .env e Padrao Proxy
+ * Exemplo 04 - Leitura de arquivo .env e Padrao Proxy (Camada Service)
  * Disciplina: Programacao Orientada a Objetos (POO)
  *
- * Interface que define o contrato de acesso aos dados da urna (Polimorfismo e Abstracao).
+ * Interface da camada de persistencia (contrato de comunicacao com o banco).
  */
 package br.edu.urna.proxy;
 
 import java.util.List;
 
 /**
- * Define as operacoes que qualquer fonte de dados da urna precisa fornecer.
- * A tela (View) e o controlador (Controller) dependem desta interface, e nao
- * diretamente do Firebase ou de listas em memoria.
+ * Define as operacoes basicas que qualquer classe de persistencia da urna
+ * (Firebase Admin SDK, Firebase REST ou Memoria) precisa implementar.
  */
 public interface UrnaRepository {
 
     /**
-     * Lista os candidatos cadastrados.
-     *
-     * @return Lista de nomes/numeros dos candidatos em texto simples neste exemplo.
+     * Lista todos os candidatos cadastrados.
      */
     List<String> listarCandidatos();
 
     /**
+     * Busca as informacoes de um candidato pelo numero completo.
+     * Retorna null se nao existir.
+     */
+    String buscarCandidatoPorNumero(String numero);
+
+    /**
+     * Busca o nome do partido pelos dois primeiros digitos.
+     * Retorna null se o partido nao existir.
+     */
+    String buscarPartidoPorNumero(String numeroPartido);
+
+    /**
      * Registra um voto na fonte de dados.
-     *
-     * @param numeroDigitado Numero votado (ou "BRANCO" / "NULO").
      */
     void salvarVoto(String numeroDigitado);
 
     /**
      * Lista todos os votos registrados ate o momento.
-     *
-     * @return Lista de votos gravados.
      */
     List<String> listarVotos();
 }
